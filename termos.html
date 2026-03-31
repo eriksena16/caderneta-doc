@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termos de Uso — Caderneta do Bairro</title>
+  <style>
+    :root {
+      --brand: #16a34a;
+      --brand-dark: #166534;
+      --bg: #f5f7f6;
+      --surface: #ffffff;
+      --surface-soft: #f0fdf4;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #dbe4dd;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max-width: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(22, 163, 74, 0.12), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(219, 228, 221, 0.85);
+    }
+
+    .topbar-inner,
+    .hero,
+    .content,
+    .footer-inner {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 16px 30px rgba(22, 163, 74, 0.18);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .menu a,
+    .back-home {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .menu a {
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .menu a.active {
+      background: var(--surface-soft);
+      color: var(--brand-dark);
+    }
+
+    .menu a:hover,
+    .back-home:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 56px 0 32px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.08), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(22, 163, 74, 0.14);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 40px;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(22, 163, 74, 0.12), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--brand-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .meta-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .content {
+      flex: 1;
+      padding-bottom: 48px;
+    }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid rgba(219, 228, 221, 0.9);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .section {
+      padding: 20px;
+      border-radius: var(--radius-md);
+    }
+
+    .section + .section {
+      margin-top: 8px;
+      border-top: 1px solid #edf2ee;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    p + p,
+    ul,
+    ol {
+      margin-top: 14px;
+    }
+
+    ul,
+    ol {
+      padding-left: 22px;
+      color: var(--muted);
+    }
+
+    li + li {
+      margin-top: 10px;
+    }
+
+    .highlight {
+      background: linear-gradient(180deg, rgba(22, 163, 74, 0.08), rgba(22, 163, 74, 0.03));
+      border: 1px solid rgba(22, 163, 74, 0.12);
+    }
+
+    .back-row {
+      display: flex;
+      justify-content: flex-start;
+      padding: 12px 20px 0;
+    }
+
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.2);
+    }
+
+    footer {
+      border-top: 1px solid rgba(219, 228, 221, 0.9);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0 32px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .hero-card,
+      .content-card {
+        padding: 24px;
+      }
+
+      .section {
+        padding: 16px 0;
+      }
+
+      .back-row {
+        padding: 8px 0 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Cabecalho principal do site com navegacao institucional -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./index.html" aria-label="Pagina inicial do Caderneta do Bairro">
+          <span class="brand-mark">CB</span>
+          <span class="brand-text">
+            <span class="brand-title">Caderneta do Bairro</span>
+            <span class="brand-subtitle">SaaS para organizar clientes, vendas e rotina</span>
+          </span>
+        </a>
+        <nav class="menu" aria-label="Menu principal do site">
+          <a href="./index.html">Home</a>
+          <a class="active" href="./termos.html">Termos de Uso</a>
+          <a href="./privacidade.html">Politica de Privacidade</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Bloco de abertura com contexto rapido do documento -->
+      <section class="hero">
+        <div class="hero-card">
+          <div class="eyebrow">Documento Legal</div>
+          <h1>Termos de Uso — Caderneta do Bairro</h1>
+          <p class="lead">
+            Estes Termos de Uso estabelecem as condicoes para utilizacao do aplicativo Caderneta do Bairro.
+            Ao acessar ou utilizar a plataforma, o usuario declara que leu, compreendeu e concorda com estas regras.
+          </p>
+          <div class="hero-meta">
+            <span class="meta-chip">Responsavel: Erik Sena</span>
+            <span class="meta-chip">Atualizado em 2026</span>
+            <span class="meta-chip">Uso em ambiente web</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="content-card">
+          <div class="back-row">
+            <a class="back-home" href="./index.html">Voltar para home</a>
+          </div>
+
+          <!-- Corpo principal com as clausulas organizadas em secoes -->
+          <article class="section highlight">
+            <h2>1. Sobre o aplicativo</h2>
+            <p>
+              O Caderneta do Bairro e um aplicativo SaaS voltado para pequenos negocios, autonomos e estabelecimentos
+              locais que precisam registrar clientes, controlar vendas no fiado, organizar produtos, servicos, orcamentos,
+              compromissos e pontos de contato com mais agilidade.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>2. Aceitacao dos termos</h2>
+            <p>
+              O uso da plataforma implica a aceitacao integral destes Termos de Uso e de eventuais atualizacoes futuras.
+              Caso o usuario nao concorde com qualquer disposicao aqui prevista, nao deve utilizar o aplicativo.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>3. Cadastro de usuario</h2>
+            <p>
+              Para acessar determinadas funcionalidades, pode ser necessario criar uma conta com informacoes verdadeiras,
+              completas e atualizadas. O usuario e responsavel pela confidencialidade de suas credenciais de acesso e por
+              toda atividade realizada em sua conta.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>4. Funcionalidades</h2>
+            <p>
+              O aplicativo pode oferecer recursos para auxiliar a rotina operacional do negocio, incluindo, entre outros:
+            </p>
+            <ul>
+              <li>Cadastro de clientes;</li>
+              <li>Registrar vendas no fiado e acompanhar valores pendentes;</li>
+              <li>Criar orcamentos para produtos e servicos;</li>
+              <li>Gerenciar catalogos de produtos e servicos;</li>
+              <li>Organizar agendamentos e compromissos;</li>
+              <li>Gerar Pix copia e cola para facilitar cobrancas;</li>
+              <li>Utilizar botoes que abrem conversas no WhatsApp de forma direta.</li>
+            </ul>
+            <p>
+              As funcionalidades podem ser alteradas, ampliadas, limitadas ou descontinuadas a qualquer momento, conforme
+              evolucao do servico.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>5. Responsabilidade do usuario</h2>
+            <p>
+              O usuario e integralmente responsavel pelos dados que inserir no aplicativo, pela legalidade de sua atividade
+              comercial e pela forma como utiliza as ferramentas disponibilizadas. Tambem e responsabilidade do usuario:
+            </p>
+            <ul>
+              <li>Manter seus dados de cadastro corretos e atualizados;</li>
+              <li>Utilizar a plataforma em conformidade com a legislacao aplicavel;</li>
+              <li>Respeitar direitos de terceiros e nao utilizar o sistema para praticas ilicitas ou abusivas;</li>
+              <li>Conferir as informacoes antes de compartilhamento com clientes ou parceiros.</li>
+            </ul>
+          </article>
+
+          <article class="section">
+            <h2>6. Versao gratuita e versao paga futura</h2>
+            <p>
+              O Caderneta do Bairro pode ser disponibilizado inicialmente em versao gratuita, com possibilidade de lancamento
+              futuro de planos pagos, recursos premium ou limites de uso. Caso isso ocorra, as condicoes comerciais serao
+              apresentadas de forma clara aos usuarios antes de qualquer cobranca.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>7. Disponibilidade do servico</h2>
+            <p>
+              Embora exista esforco para manter o aplicativo disponivel de forma continua, nao ha garantia de operacao sem
+              interrupcoes, falhas tecnicas, indisponibilidades temporarias, manutencoes programadas ou eventos externos
+              fora de controle razoavel.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>8. Suspensao de conta</h2>
+            <p>
+              Contas poderao ser suspensas ou encerradas, com ou sem aviso previo, em caso de suspeita de fraude, uso indevido,
+              violacao destes Termos, risco a seguranca do servico ou determinacao legal.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>9. Propriedade intelectual</h2>
+            <p>
+              A marca Caderneta do Bairro, sua identidade visual, codigos, interfaces, textos, estruturas e demais elementos
+              do aplicativo sao protegidos pela legislacao aplicavel e permanecem sob titularidade de seus respectivos direitos.
+              O uso da plataforma nao transfere ao usuario qualquer direito de propriedade intelectual sobre o servico.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>10. Alteracao dos termos</h2>
+            <p>
+              Estes Termos de Uso podem ser atualizados periodicamente para refletir melhorias, ajustes operacionais ou
+              exigencias legais. A versao vigente sera aquela publicada nesta pagina, cabendo ao usuario revisa-la
+              regularmente.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>11. Contato</h2>
+            <p>
+              Para duvidas, solicitacoes ou comunicacoes relacionadas a estes Termos de Uso, o contato responsavel e Erik Sena.
+              O canal oficial de atendimento do projeto e
+              <a href="mailto:eriksena16@gmail.com">eriksena16@gmail.com</a>.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodape institucional simples e consistente com a identidade visual -->
+    <footer>
+      <div class="footer-inner">
+        <span>Caderneta do Bairro</span>
+        <span>Erik Sena</span>
+        <span>&copy; 2026</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

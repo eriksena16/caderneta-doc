@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderneta do Bairro</title>
+  <style>
+    :root {
+      --brand: #16a34a;
+      --brand-dark: #166534;
+      --brand-soft: #dcfce7;
+      --bg: #f5f7f6;
+      --surface: #ffffff;
+      --surface-soft: #f0fdf4;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #dbe4dd;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(22, 163, 74, 0.12), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(22, 163, 74, 0.08), transparent 26%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(219, 228, 221, 0.85);
+    }
+
+    .topbar-inner,
+    .hero,
+    .content,
+    .footer-inner {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 16px 30px rgba(22, 163, 74, 0.18);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .menu a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .menu a.active,
+    .menu a:hover {
+      background: var(--surface-soft);
+      color: var(--brand-dark);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .side-card,
+    .feature-card,
+    .links-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(219, 228, 221, 0.9);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.08), rgba(255, 255, 255, 0.96));
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(22, 163, 74, 0.15), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--brand-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .button {
+      background: var(--brand);
+      color: #ffffff;
+      box-shadow: 0 16px 28px rgba(22, 163, 74, 0.22);
+    }
+
+    .button-secondary {
+      background: #ffffff;
+      color: var(--brand-dark);
+      border: 1px solid var(--border);
+    }
+
+    .button:hover,
+    .button-secondary:hover,
+    .resource-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .side-card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .side-title {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .side-copy {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .mini-stat {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, var(--surface-soft), #ffffff);
+      border: 1px solid rgba(22, 163, 74, 0.12);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.65rem;
+      letter-spacing: -0.04em;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .content {
+      flex: 1;
+      padding-bottom: 48px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.9fr);
+      gap: 22px;
+    }
+
+    .feature-card,
+    .links-card {
+      padding: 26px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.45rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-intro {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature-item {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, #ffffff, #f8faf8);
+      border: 1px solid var(--border);
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .feature-item span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .resource-link {
+      display: block;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff, #fafcfb);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .resource-link:hover {
+      border-color: rgba(22, 163, 74, 0.25);
+      box-shadow: 0 16px 26px rgba(15, 23, 42, 0.06);
+    }
+
+    .resource-link strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .resource-link span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(219, 228, 221, 0.9);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0 32px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .section-grid,
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-card,
+      .side-card,
+      .feature-card,
+      .links-card {
+        padding: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Cabecalho principal do site com navegacao institucional -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./index.html" aria-label="Pagina inicial do Caderneta do Bairro">
+          <span class="brand-mark">CB</span>
+          <span class="brand-text">
+            <span class="brand-title">Caderneta do Bairro</span>
+            <span class="brand-subtitle">SaaS para organizar clientes, vendas e rotina</span>
+          </span>
+        </a>
+        <nav class="menu" aria-label="Menu principal do site">
+          <a class="active" href="./index.html">Home</a>
+          <a href="./termos.html">Termos de Uso</a>
+          <a href="./privacidade.html">Politica de Privacidade</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Apresentacao principal da pagina inicial -->
+      <section class="hero">
+        <div class="hero-grid">
+          <article class="hero-card">
+            <div class="eyebrow">Aplicativo SaaS</div>
+            <h1>Caderneta do Bairro</h1>
+            <p class="lead">
+              Uma pagina inicial objetiva e profissional para apresentar o aplicativo, organizar a navegacao e dar acesso
+              rapido aos documentos institucionais publicados no GitHub Pages.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="./termos.html">Ver Termos de Uso</a>
+              <a class="button-secondary" href="./privacidade.html">Ver Politica de Privacidade</a>
+            </div>
+          </article>
+
+          <aside class="side-card">
+            <div>
+              <h2 class="side-title">Navegacao clara</h2>
+              <p class="side-copy">
+                Esta home concentra os links principais e melhora a apresentacao institucional do projeto.
+              </p>
+              <p class="side-copy">
+                Contato: <a href="mailto:eriksena16@gmail.com">eriksena16@gmail.com</a>
+              </p>
+            </div>
+            <div class="mini-stat">
+              <strong>3 paginas</strong>
+              <span>Home, Termos de Uso e Politica de Privacidade em um conjunto visual consistente.</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Blocos de conteudo com links e resumo do aplicativo -->
+      <section class="content">
+        <div class="section-grid">
+          <article class="feature-card">
+            <h2>O que o app organiza</h2>
+            <p class="section-intro">
+              O Caderneta do Bairro foi pensado para pequenos negocios que precisam centralizar operacoes do dia a dia em um
+              ambiente simples, direto e profissional.
+            </p>
+            <div class="feature-list">
+              <div class="feature-item">
+                <strong>Clientes e fiado</strong>
+                <span>Controle cadastro, historico e valores pendentes com mais clareza.</span>
+              </div>
+              <div class="feature-item">
+                <strong>Orcamentos</strong>
+                <span>Monte propostas de produtos e servicos de forma organizada.</span>
+              </div>
+              <div class="feature-item">
+                <strong>Agenda</strong>
+                <span>Gerencie compromissos e atendimentos em uma rotina centralizada.</span>
+              </div>
+              <div class="feature-item">
+                <strong>Contato rapido</strong>
+                <span>Use links para WhatsApp e cobrancas por Pix copia e cola com mais agilidade.</span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="links-card">
+            <h2>Links principais</h2>
+            <p class="section-intro">
+              Acesso rapido aos documentos publicos e navegacao basica do projeto.
+            </p>
+            <div class="resource-list">
+              <a class="resource-link" href="./index.html">
+                <strong>Home</strong>
+                <span>Voltar para a pagina principal do site.</span>
+              </a>
+              <a class="resource-link" href="./termos.html">
+                <strong>Termos de Uso</strong>
+                <span>Consultar regras de utilizacao do aplicativo.</span>
+              </a>
+              <a class="resource-link" href="./privacidade.html">
+                <strong>Politica de Privacidade</strong>
+                <span>Entender como os dados podem ser tratados pela plataforma.</span>
+              </a>
+              <a class="resource-link" href="mailto:eriksena16@gmail.com">
+                <strong>Contato</strong>
+                <span>Falar diretamente com Erik Sena por e-mail.</span>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodape institucional simples -->
+    <footer>
+      <div class="footer-inner">
+        <span>Caderneta do Bairro</span>
+        <span>Erik Sena</span>
+        <span>&copy; 2026</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

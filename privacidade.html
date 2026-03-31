@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade — Caderneta do Bairro</title>
+  <style>
+    :root {
+      --brand: #16a34a;
+      --brand-dark: #166534;
+      --bg: #f5f7f6;
+      --surface: #ffffff;
+      --surface-soft: #f0fdf4;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #dbe4dd;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max-width: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(22, 163, 74, 0.12), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(219, 228, 221, 0.85);
+    }
+
+    .topbar-inner,
+    .hero,
+    .content,
+    .footer-inner {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 16px 30px rgba(22, 163, 74, 0.18);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .menu a,
+    .back-home {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .menu a {
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .menu a.active {
+      background: var(--surface-soft);
+      color: var(--brand-dark);
+    }
+
+    .menu a:hover,
+    .back-home:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 56px 0 32px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.08), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(22, 163, 74, 0.14);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 40px;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -80px -80px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(22, 163, 74, 0.12), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--brand-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .meta-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .content {
+      flex: 1;
+      padding-bottom: 48px;
+    }
+
+    .content-card {
+      background: var(--surface);
+      border: 1px solid rgba(219, 228, 221, 0.9);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .section {
+      padding: 20px;
+      border-radius: var(--radius-md);
+    }
+
+    .section + .section {
+      margin-top: 8px;
+      border-top: 1px solid #edf2ee;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    p + p,
+    ul {
+      margin-top: 14px;
+    }
+
+    ul {
+      padding-left: 22px;
+      color: var(--muted);
+    }
+
+    li + li {
+      margin-top: 10px;
+    }
+
+    .highlight {
+      background: linear-gradient(180deg, rgba(22, 163, 74, 0.08), rgba(22, 163, 74, 0.03));
+      border: 1px solid rgba(22, 163, 74, 0.12);
+    }
+
+    .back-row {
+      display: flex;
+      justify-content: flex-start;
+      padding: 12px 20px 0;
+    }
+
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #ffffff;
+      box-shadow: 0 14px 28px rgba(22, 163, 74, 0.2);
+    }
+
+    footer {
+      border-top: 1px solid rgba(219, 228, 221, 0.9);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0 32px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 32px;
+      }
+
+      .hero-card,
+      .content-card {
+        padding: 24px;
+      }
+
+      .section {
+        padding: 16px 0;
+      }
+
+      .back-row {
+        padding: 8px 0 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Cabecalho principal do site com navegacao institucional -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./index.html" aria-label="Pagina inicial do Caderneta do Bairro">
+          <span class="brand-mark">CB</span>
+          <span class="brand-text">
+            <span class="brand-title">Caderneta do Bairro</span>
+            <span class="brand-subtitle">SaaS para organizar clientes, vendas e rotina</span>
+          </span>
+        </a>
+        <nav class="menu" aria-label="Menu principal do site">
+          <a href="./index.html">Home</a>
+          <a href="./termos.html">Termos de Uso</a>
+          <a class="active" href="./privacidade.html">Politica de Privacidade</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Bloco introdutorio com resumo do compromisso de privacidade -->
+      <section class="hero">
+        <div class="hero-card">
+          <div class="eyebrow">Privacidade e Dados</div>
+          <h1>Política de Privacidade — Caderneta do Bairro</h1>
+          <p class="lead">
+            Esta Politica de Privacidade explica quais dados podem ser tratados pelo Caderneta do Bairro, como essas
+            informacoes sao utilizadas e quais direitos o usuario possui em relacao aos seus dados pessoais.
+          </p>
+          <div class="hero-meta">
+            <span class="meta-chip">Compromisso com transparencia</span>
+            <span class="meta-chip">Referencia LGPD</span>
+            <span class="meta-chip">Atualizado em 2026</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="content-card">
+          <div class="back-row">
+            <a class="back-home" href="./index.html">Voltar para home</a>
+          </div>
+
+          <!-- Secoes principais da politica de privacidade -->
+          <article class="section highlight">
+            <h2>1. Dados coletados</h2>
+            <p>
+              Para funcionamento da plataforma, podem ser coletadas ou armazenadas informacoes fornecidas pelo proprio usuario,
+              incluindo:
+            </p>
+            <ul>
+              <li>Nome;</li>
+              <li>Email;</li>
+              <li>Clientes cadastrados;</li>
+              <li>Produtos;</li>
+              <li>Servicos;</li>
+              <li>Agenda.</li>
+            </ul>
+          </article>
+
+          <article class="section">
+            <h2>2. Uso das informacoes</h2>
+            <p>
+              Os dados tratados sao utilizados para permitir o acesso a conta, operar os recursos do aplicativo, organizar
+              a rotina do negocio, melhorar a experiencia do usuario, oferecer suporte e manter a seguranca do servico.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>3. Compartilhamento de dados</h2>
+            <p>
+              O Caderneta do Bairro nao comercializa dados pessoais. O compartilhamento pode ocorrer apenas quando necessario
+              para operacao tecnica do servico, cumprimento de obrigacoes legais, atendimento a autoridade competente ou uso
+              de infraestrutura essencial de armazenamento e processamento.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>4. Seguranca</h2>
+            <p>
+              Sao adotadas medidas tecnicas e organizacionais razoaveis para proteger os dados contra acesso nao autorizado,
+              perda, destruicao, alteracao ou divulgacao indevida. Ainda assim, nenhum sistema e totalmente imune a riscos,
+              e por isso o usuario tambem deve proteger suas credenciais e dispositivos.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>5. Armazenamento em nuvem</h2>
+            <p>
+              As informacoes podem ser armazenadas em servicos de nuvem contratados para hospedar a aplicacao e garantir
+              escalabilidade, continuidade operacional e acesso remoto. Esses provedores podem utilizar servidores em diferentes
+              localidades, observadas as exigencias legais aplicaveis.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>6. WhatsApp</h2>
+            <p>
+              O aplicativo pode disponibilizar botoes que redirecionam o usuario para o WhatsApp. Esse recurso nao representa
+              integracao oficial com a plataforma do WhatsApp, servindo apenas como atalho de redirecionamento iniciado pelo
+              proprio usuario.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>7. Direitos LGPD</h2>
+            <p>
+              Nos termos da Lei Geral de Protecao de Dados, o usuario pode solicitar informacoes sobre tratamento de seus dados,
+              confirmar a existencia de processamento, corrigir dados incompletos, requisitar exclusao quando cabivel e exercer
+              outros direitos previstos em lei, observadas as limitacoes legais e tecnicas aplicaveis.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>8. Exclusao de conta</h2>
+            <p>
+              O usuario pode solicitar a exclusao de sua conta e dos dados associados, ressalvadas as informacoes que precisem
+              ser mantidas por obrigacao legal, regulatoria ou para exercicio regular de direitos. O procedimento de exclusao
+              deve ser solicitado por meio do canal oficial de contato do projeto.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>9. Alteracoes</h2>
+            <p>
+              Esta Politica de Privacidade pode ser atualizada para refletir mudancas operacionais, tecnicas ou legais. A versao
+              vigente sera sempre a publicada nesta pagina, sendo recomendavel consulta periodica pelo usuario.
+            </p>
+          </article>
+
+          <article class="section">
+            <h2>10. Contato</h2>
+            <p>
+              Para duvidas, solicitacoes relacionadas a privacidade, exercicio de direitos ou pedidos de exclusao de conta,
+              o contato responsavel e Erik Sena. O canal oficial para atendimento e
+              <a href="mailto:eriksena16@gmail.com">eriksena16@gmail.com</a>.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodape com identificacao institucional -->
+    <footer>
+      <div class="footer-inner">
+        <span>Caderneta do Bairro</span>
+        <span>Erik Sena</span>
+        <span>&copy; 2026</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
