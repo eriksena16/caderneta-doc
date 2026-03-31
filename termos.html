@@ -85,14 +85,10 @@
     .brand-mark {
       width: 42px;
       height: 42px;
-      display: grid;
-      place-items: center;
+      display: block;
       border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
-      color: #ffffff;
-      font-size: 1.2rem;
-      font-weight: 700;
       box-shadow: 0 16px 30px rgba(22, 163, 74, 0.18);
+      object-fit: cover;
     }
 
     .brand-text {
@@ -339,7 +335,7 @@
     <header class="topbar">
       <div class="topbar-inner">
         <a class="brand" href="./index.html" aria-label="Pagina inicial do Caderneta do Bairro">
-          <span class="brand-mark">CB</span>
+          <img class="brand-mark" src="./img/logo-app.png" alt="Logo do Caderneta do Bairro">
           <span class="brand-text">
             <span class="brand-title">Caderneta do Bairro</span>
             <span class="brand-subtitle">SaaS para organizar clientes, vendas e rotina</span>
